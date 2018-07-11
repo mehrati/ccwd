@@ -1,0 +1,6 @@
+[package]
+name = "ccwd"
+version = "0.1.0"
+authors = ["mehrati <geekoffmail@gmail.com>"]
+
+[dependencies]
