@@ -2,13 +2,13 @@ use std::env;
 use std::fs;
 use std::process::{exit, Command, Stdio};
 
-struct Clipboard<'a> {
+pub struct Clipboard<'a> {
     cmd: String,
     args: &'a [&'a str],
 }
 
 impl<'a> Clipboard<'a> {
-    fn new() -> Self {
+    pub fn new() -> Self {
         if let Ok(n) = is_program_in_path("xsel") {
             Clipboard {
                 cmd: n.to_owned(),
@@ -27,7 +27,7 @@ impl<'a> Clipboard<'a> {
             }
         }
     }
-    fn run(self, input: String) {
+    pub fn run(self, input: String) {
         let echo = Command::new("echo")
             .arg("-n")
             .arg(input)
@@ -49,8 +49,8 @@ fn main() {
     let clip = Clipboard::new();
     clip.run(get_cwd_name());
 }
-fn get_cwd_name() -> String {
-    let cwd = env::current_dir().unwrap(); // env::var_os("PWD").unwrap()
+pub fn get_cwd_name() -> String {
+    let cwd = env::current_dir().unwrap();
     let arg: Vec<String> = env::args().collect();
     if arg.len() > 1 {
         return cwd.join(&arg[1]).to_str().unwrap().to_owned();
@@ -58,7 +58,7 @@ fn get_cwd_name() -> String {
     cwd.to_str().unwrap().to_owned()
 }
 
-fn is_program_in_path(program: &str) -> Result<String, String> {
+pub fn is_program_in_path(program: &str) -> Result<String, String> {
     if let Ok(path) = env::var("PATH") {
         for p in path.split(":") {
             let p_str = format!("{}/{}", p, program);
@@ -68,4 +68,20 @@ fn is_program_in_path(program: &str) -> Result<String, String> {
         }
     }
     Err(format!("{} not found !", program))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn test_is_program_in_path() {
+        assert_eq!(is_program_in_path("ls").unwrap(), "ls");
+    }
+    #[test]
+    fn test_get_cwd_name() {
+        assert_eq!(
+            get_cwd_name(),
+            env::var_os("PWD").unwrap().to_str().unwrap()
+        );
+    }
 }
