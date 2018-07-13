@@ -53,6 +53,14 @@ pub fn get_cwd_name() -> String {
     let cwd = env::current_dir().unwrap();
     let arg: Vec<String> = env::args().collect();
     if arg.len() > 1 {
+        if &arg[1] == "." {
+            return cwd.to_str().unwrap().to_owned();
+        } else if &arg[1] == ".." {
+            let s = cwd.to_str().unwrap();
+            let rs: String = s.chars().rev().collect();
+            let l = rs.len() - rs.find('/').unwrap();
+            return s[..l].to_owned();
+        }
         return cwd.join(&arg[1]).to_str().unwrap().to_owned();
     }
     cwd.to_str().unwrap().to_owned()
