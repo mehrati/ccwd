@@ -2,5 +2,11 @@
 name = "ccwd"
 version = "0.1.0"
 authors = ["mehrati <geekoffmail@gmail.com>"]
-
+license = "MIT"
+repository = "https://github.com/mehrati/ccwd"
+description = "copy current working dirctory to clipboard"
+keywords = ["xset", "xclip", "pwd", "tool","path","clipboard","cli",]
+categories = ["cli tool"]
+readme = "README.md"
+documentation = ""
 [dependencies]
