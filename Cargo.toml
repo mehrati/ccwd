@@ -8,5 +8,5 @@ description = "copy current working dirctory to clipboard"
 keywords = ["xset", "xclip", "pwd","clipboard","linux",]
 categories = ["cli tool"]
 readme = "README.md"
-documentation = ""
+documentation = "https://docs.rs/ccwd"
 [dependencies]
