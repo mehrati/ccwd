@@ -4,8 +4,10 @@
 copy current working dirctory to clipboard for linux
 
 **install**
+
 ```sh
 cargo install ccwd
 ```
 **dependencies**
+
 xclip or xset
