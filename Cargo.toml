@@ -1,6 +1,6 @@
 [package]
 name = "ccwd"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["mehrati <geekoffmail@gmail.com>"]
 license = "MIT"
 repository = "https://github.com/mehrati/ccwd"
